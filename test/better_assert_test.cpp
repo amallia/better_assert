@@ -22,14 +22,12 @@
 #include "better_assert/better_assert.hpp"
 #define NDEBUG
 
-
 TEST(better_assert, expect_death) {
-    EXPECT_DEATH(better_assert(1 != 1, "1 is always equal to 1."), "1 is always equal to 1.");
+    EXPECT_DEATH(better_assert(1 != 1, "1 is always equal to 1."),
+                 "[.*better_assert_test.cpp:27].*1 != 1.*1 is always equal to 1.");
 }
 
-TEST(better_assert, expect_nothing) {
-    better_assert(1 == 1, "Nothing should happen here.");
-}
+TEST(better_assert, expect_nothing) { better_assert(1 == 1, "Nothing should happen here."); }
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
