@@ -19,15 +19,17 @@
 #define _STRINGIZE_I(x) #x
 #define _STRINGIZE(x) _STRINGIZE_I(x)
 
+inline void _better_assert(const char *condition, const char *message, const char *fileline) {
+    std::cerr << "[" << fileline << "] "
+              << "Assertion `" << condition << "` failed.\n"
+              << message << std::endl;
+    std::abort();
+}
 
 inline void _better_assert(const char *       condition,
                            const std::string &message,
                            const char *       fileline) {
-    std::cerr << "[" << fileline << "] "
-              << "Assertion `" << condition << "` failed.\n"
-              << message << std::endl;
-
-    std::abort();
+    _better_assert(condition, message.c_str(), fileline);
 }
 
 #ifdef NDEBUG
