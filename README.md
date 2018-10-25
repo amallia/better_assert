@@ -1,5 +1,8 @@
 # better_assert
-A better assertion library
+
+[![Build Status](https://travis-ci.org/amallia/better_assert.svg?branch=master)](https://travis-ci.org/amallia/better_assert)
+
+A better assertion library which also prints a message.
 
 ## Usage
 
