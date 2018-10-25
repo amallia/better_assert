@@ -16,11 +16,14 @@
 
 #pragma once
 
-inline void _better_assert(const std::string &condition,
+#define _STRINGIZE_I(x) #x
+#define _STRINGIZE(x) _STRINGIZE_I(x)
+
+
+inline void _better_assert(const char *       condition,
                            const std::string &message,
-                           const std::string &file,
-                           size_t             line) {
-    std::cerr << "[" << file << ":" << line << "] "
+                           const char *       fileline) {
+    std::cerr << "[" << fileline << "] "
               << "Assertion `" << condition << "` failed.\n"
               << message << std::endl;
 
@@ -30,7 +33,8 @@ inline void _better_assert(const std::string &condition,
 #ifdef NDEBUG
 #define better_assert(condition, message) static_cast<void>(0)
 #else
-#define better_assert(condition, message)                \
-    (static_cast<bool>(condition) ? static_cast<void>(0) \
-                                  : _better_assert(#condition, message, __FILE__, __LINE__))
+#define better_assert(condition, message) \
+    static_cast<bool>(condition)          \
+        ? static_cast<void>(0)            \
+        : _better_assert(#condition, message, __FILE__ ":" _STRINGIZE(__LINE__))
 #endif
