@@ -3,4 +3,6 @@ EXECUTE_PROCESS(COMMAND git submodule update --init
                 OUTPUT_QUIET
         )
 
-add_subdirectory(googletest EXCLUDE_FROM_ALL)
+if(NOT TARGET gtest)
+    add_subdirectory(googletest EXCLUDE_FROM_ALL)
+endif()
